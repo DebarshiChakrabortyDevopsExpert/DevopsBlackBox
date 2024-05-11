@@ -1,0 +1,39 @@
+trigger:
+ branches:
+  include:
+    - develop
+ paths:
+  include:
+    - webapp/java/gs-spring-boot-main/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- task: Maven@4
+  inputs:
+    mavenPomFile: '$(system.defaultWorkingDirectory)/javawebapp/java/gs-spring-boot-main/complete/pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    mavenVersionOption: 'Default'
+    mavenOptions: '-Xmx3072m'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    goals: 'package'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '**/target/*.?(war|jar)'
+    TargetFolder: $(Build.ArtifactStagingDirectory)
+
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'

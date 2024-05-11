@@ -1,0 +1,2 @@
+[tomcat_servers]
+ansible-test-machine ansible_host=10.0.2.4 ansible_connection=ssh ansible_user=azureadmin ansible_ssh_pass=Farcry$456@1234

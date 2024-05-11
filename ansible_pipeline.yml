@@ -1,0 +1,69 @@
+trigger:
+- none
+
+parameters:
+- name: AnsiblePlaybook
+  displayName: Ansible Playbook
+  type: string
+  default: install_java_tomcat
+  values:
+  - install_java_tomcat
+  - install_docker
+
+- name: CheckService
+  displayName: Check Services
+  type: string
+  default: check_system_services
+  values:
+  - check_system_services
+
+- name: EnvironmentHostFile
+  displayName: Host File Based on Environment
+  type: string
+  default: dev_host
+  values:
+  - dev_host
+  - uat_host
+  - prod_host
+
+- name: AgentName
+  displayName: Ansible Agent Based on Environment
+  type: string
+  default: ansible-agent
+  values:
+  - ansible-agent
+  - ansible-agent-uat
+  - ansible-agent-prod
+
+stages:
+
+- stage: Ansible_Automation
+
+  jobs:
+  - job: AnsiblePackageInstaller
+    displayName: 'Ansible Package Installer'
+    pool: 
+      name: Default
+      demands:
+       - agent.name -equals ${{ parameters.AgentName }}
+    continueOnError: false      
+    steps:
+    - checkout: self
+
+    - task: CmdLine@2
+      displayName: 'Ansible ping Check'
+      inputs:
+        script: |
+          ansible-playbook -i ansible/${{ parameters.EnvironmentHostFile }}.yml ansible/playbooks/ping.yml
+
+    - task: CmdLine@2
+      displayName: 'Service Checks'
+      inputs:
+        script: |
+          ansible-playbook -i ansible/${{ parameters.EnvironmentHostFile }}.yml ansible/playbooks/check_service/${{ parameters.CheckService }}.yml
+
+    - task: CmdLine@2
+      displayName: 'Ansible Package Installer'
+      inputs:
+        script: |
+          ansible-playbook -i ansible/${{ parameters.EnvironmentHostFile }}.yml ansible/playbooks/install_packages/${{ parameters.AnsiblePlaybook }}.yml

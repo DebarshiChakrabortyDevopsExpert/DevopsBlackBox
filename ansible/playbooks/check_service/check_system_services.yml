@@ -1,0 +1,16 @@
+- name: checking service status
+  hosts: all
+
+  tasks:
+
+  - name: checking service status
+    command: service "{{ item }}" status
+    with_items:
+    - docker
+    - sshd
+    register: result
+    ignore_errors: yes
+
+  - name: showing report
+    debug:
+     var: result
