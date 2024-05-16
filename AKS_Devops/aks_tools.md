@@ -1,4 +1,4 @@
-![image](https://github.com/DebarshiDevopsGeek/DevopsBlackBox/assets/166385395/e75e52ef-af90-4dda-a386-8e342a3c6989)# Security
+# Security
 
 	• Trivy, a scanning tool that provides vulnerability detection for operating systems
 	• Clair, a vulnerability static scanning tool for containers
@@ -17,45 +17,53 @@
 	• Dynatrace
 
 # Alerting 
-• Kubewatch
-• Prometheus
-• Grafana
-• kube ops View 
+
+	• Kubewatch
+	• Prometheus
+	• Grafana
+	• kube ops View 
 
 # Pod Autoscaling
-• Kubernetes HPA
-• Kubernetes VPA
-• Keda
-• ClickIT
+
+	• Kubernetes HPA
+	• Kubernetes VPA
+	• Keda
+	• ClickIT
 
 # Node Autoscaling
-• Karpenter
+
+	• Karpenter
 
 # Load Balancer
-• Traefik
-• Haproxy
-• Nginx
-• Pen
-• Gobetween
-• Openelb
-• Mosn
-• Metallb
-• Envoy
-• Katran
+
+	• Traefik
+	• Haproxy
+	• Nginx
+	• Pen
+	• Gobetween
+	• Openelb
+	• Mosn
+	• Metallb
+	• Envoy
+	• Katran
 
 # Backup and Restore
-• Kasten
-• Velero
+
+	• Kasten
+	• Velero
 
 # Kubernetes management Tools
-• kubectl
-• helm
-• kustomize
+
+	• kubectl
+	• helm
+	• kustomize
 
 # Gitops
-• Flux
-• ArgoCD
+
+	• Flux
+	• ArgoCD
 
 # Disaster Recovery
-• Stash
+
+	• Stash
 
